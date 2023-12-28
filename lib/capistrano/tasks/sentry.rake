@@ -46,7 +46,7 @@ namespace :sentry do
       api_token = ENV['SENTRY_API_TOKEN'] || fetch(:sentry_api_token)
       repo_integration_enabled = fetch(:sentry_repo_integration, true)
       release_refs = fetch(:sentry_release_refs, [{
-        repository:     fetch(:sentry_repo) || fetch(:repo_url).split(':').last.delete_suffix('.git'),
+        repository:     fetch(:sentry_repo) || fetch(:repo_url).split(':').last.gsub(/\.git$/, ''),
         commit:         head_revision,
         previousCommit: prev_revision
       }])
